@@ -1,20 +1,22 @@
 #ifndef CADASTRO_ASTRONAUTA_H
 #define CADASTRO_ASTRONAUTA_H
 
-#include <iostream>
-#include <string>
 #include <vector>
-#include "Voo.h"
+#include <string>
+#include <iostream>
 #include "Astronauta.h"
+#include "Voo.h"
 
-class CadastroAstronauta{
-private:
-    std::vector<Astronauta> astronautas_; //novo vetor de objetos Astronauta criado exclusivamente para o cadastro de astronautas 
+class CadastroAstronauta {
 public:
-    void cadastrarAstronauta();
+    void adicionarAstronauta(const Astronauta& astronauta);
+    void removerAstronauta(const std::string& cpf);
+    Astronauta* buscarAstronauta(const std::string& cpf);
+    void listarAstronautas() const;
     void adicionarAstronautasVoo(Voo& voo);
+
+private:
+    std::vector<Astronauta> astronautas_;
 };
 
-
-    
-#endif
+#endif // CADASTRO_ASTRONAUTA_H

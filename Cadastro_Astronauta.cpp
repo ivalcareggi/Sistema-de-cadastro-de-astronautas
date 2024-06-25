@@ -1,36 +1,39 @@
-#include <iostream>
-#include "Astronauta.h"
 #include "Cadastro_Astronauta.h"
+#include <algorithm>
 
-void CadastroAstronauta::cadastrarAstronauta() {
- 
-    std::string cpf, nome;
-    int idade;
+void CadastroAstronauta::adicionarAstronauta(const Astronauta& astronauta) {
+    astronautas_.push_back(astronauta);
+}
 
-    std::cout << "Insira o CPF: ";
-    std::getline(std::cin, cpf);
-
-    std::cout << "Insira o nome: ";
-    std::getline(std::cin, nome);
-
-    std::cout << "Insira a idade: ";
-    std::cin >> idade;
-    std::cin.ignore();
-
-    Astronauta astronauta(cpf,nome,idade);
-    astronautas_.push_back(astronauta);  
+void CadastroAstronauta::removerAstronauta(const std::string& cpf) {
+    auto it = std::remove_if(astronautas_.begin(), astronautas_.end(), [&cpf](const Astronauta& astronauta) {
+        return astronauta.getCPF() == cpf;
+    });
+    if (it != astronautas_.end()) {
+        astronautas_.erase(it, astronautas_.end());
+        std::cout << "Astronauta removido com sucesso!\n";
+    } else {
+        std::cout << "Astronauta não encontrado.\n";
     }
+}
+
+Astronauta* CadastroAstronauta::buscarAstronauta(const std::string& cpf) {
+    for (auto& astronauta : astronautas_) {
+        if (astronauta.getCPF() == cpf) {
+            return &astronauta;
+        }
+    }
+    return nullptr;
+}
+
+void CadastroAstronauta::listarAstronautas() const {
+    for (const auto& astronauta : astronautas_) {
+        std::cout << astronauta.toString() << std::endl;
+    }
+}
 
 void CadastroAstronauta::adicionarAstronautasVoo(Voo& voo) {
     for (const auto& astronauta : astronautas_) {
         voo.addAstronauta(astronauta.getCPF());
     }
 }
-   
-    
-
-
-   
-    
-
-   
