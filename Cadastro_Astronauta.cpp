@@ -32,8 +32,24 @@ void CadastroAstronauta::listarAstronautas() const {
     }
 }
 
+void CadastroAstronauta::listarAstronautasMortos() const {
+    for (const auto& astronauta : astronautasMortos) {
+        std::cout << "CPF: " << astronauta.getCPF() << ", Nome: " << astronauta.getNome() << ", Idade: " << astronauta.getIdade() << '\n';
+    }
+}
+
 void CadastroAstronauta::adicionarAstronautasVoo(Voo& voo) {
     for (const auto& astronauta : astronautas_) {
         voo.addAstronauta(astronauta.getCPF());
     }
 }
+
+void CadastroAstronauta::matarAstronauta(const std::string& cpf) {
+    auto it = std::find_if(astronautas_.begin(), astronautas_.end(),
+        [&](const Astronauta& a) { return a.getCPF() == cpf; });
+    if (it != astronautas_.end()) {
+        astronautasMortos.push_back(*it);
+        astronautas_.erase(it);
+    }
+}
+

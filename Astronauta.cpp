@@ -1,14 +1,20 @@
 #include "Astronauta.h"
 
 Astronauta::Astronauta(const std::string& cpf, const std::string& nome, int idade)
-    : cpf(cpf), nome(nome), idade(idade), vivo(true), disponivel(true) {}
-
-Astronauta::~Astronauta() {}
+    : cpf_(cpf), nome_(nome), idade_(idade) {}
 
 std::string Astronauta::getCPF() const {
-    return cpf;
+    return cpf_;
+}
+
+std::string Astronauta::getNome() const {  // Implementação do método getNome
+    return nome_;
+}
+
+int Astronauta::getIdade() const {  // Implementação do método getIdade
+    return idade_;
 }
 
 std::string Astronauta::toString() const {
-    return "CPF: " + cpf + ", Nome: " + nome + ", Idade: " + std::to_string(idade);
+    return "CPF: " + cpf_ + ", Nome: " + nome_ + ", Idade: " + std::to_string(idade_);
 }

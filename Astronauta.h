@@ -6,17 +6,15 @@
 class Astronauta {
 public:
     Astronauta(const std::string& cpf, const std::string& nome, int idade);
-    ~Astronauta();
-
     std::string getCPF() const;
+    std::string getNome() const;  // Adicionando o método getNome
+    int getIdade() const;         // Adicionando o método getIdade
     std::string toString() const;
 
 private:
-    std::string cpf;
-    std::string nome;
-    int idade;
-    bool vivo;
-    bool disponivel;
+    std::string cpf_;
+    std::string nome_;
+    int idade_;
 };
 
 #endif // ASTRONAUTA_H

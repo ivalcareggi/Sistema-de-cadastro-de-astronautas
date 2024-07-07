@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <iostream>
 
-Voo::Voo(int codigo) : codigo(codigo) {}
+Voo::Voo(int codigo) : codigo(codigo), disponivel(true) {}
 
 void Voo::addAstronauta(const std::string& cpf) {
     astronautas.push_back(cpf);
@@ -29,4 +29,19 @@ std::string Voo::toString() const {
 
 int Voo::getCodigo() const {
     return codigo;
+}
+
+void Voo::lancar() {
+    disponivel = false;
+}
+
+bool Voo::estaDisponivel() const {
+    return disponivel;
+}
+
+void Voo::explodir(CadastroAstronauta& cadastroAstronauta) {
+    for (const auto& cpf : astronautas) {
+        cadastroAstronauta.matarAstronauta(cpf); // Marca astronautas como mortos
+    }
+    astronautas.clear();
 }

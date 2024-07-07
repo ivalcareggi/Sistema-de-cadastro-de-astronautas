@@ -3,6 +3,9 @@
 
 #include <string>
 #include <vector>
+#include "Cadastro_Astronauta.h" 
+
+class CadastroAstronauta;  // Declaração antecipada para evitar dependência circular
 
 class Voo {
 public:
@@ -10,10 +13,14 @@ public:
     void addAstronauta(const std::string& cpf);
     void removeAstronauta(const std::string& cpf);
     std::string toString() const;
-    int getCodigo() const;  // Added getter method
+    int getCodigo() const;  
+    void lancar();
+    bool estaDisponivel() const;
+    void explodir(CadastroAstronauta& cadastroAstronauta); 
 
 private:
     int codigo;
+    bool disponivel;
     std::vector<std::string> astronautas;
 };
 

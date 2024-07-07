@@ -1,19 +1,7 @@
-#include <iostream>
-#include <string>
 #include "GerenciamentoVoo.h"
 #include "Cadastro_Astronauta.h"
-
-void exibirMenu() {
-    std::cout << "===== Menu =====\n";
-    std::cout << "1. Cadastrar Astronauta\n";
-    std::cout << "2. Cadastrar Voo\n";
-    std::cout << "3. Adicionar Astronauta ao Voo\n";
-    std::cout << "4. Remover Astronauta do Voo\n";
-    std::cout << "5. Listar Voos\n";
-    std::cout << "6. Listar Astronautas\n";
-    std::cout << "0. Sair\n";
-    std::cout << "Escolha uma opção: ";
-}
+#include "exibirMenu.h"  // Inclua o cabeçalho do menu aqui
+#include <iostream>
 
 int main() {
     GerenciamentoVoo gerenciamentoVoo;
@@ -21,80 +9,45 @@ int main() {
     int opcao;
 
     do {
-        exibirMenu();
-        std::cin >> opcao;
-        std::cin.ignore(); // Limpa o buffer do input
+        limparTela();
+        exibirMenu();  // Chamada para exibir o menu
+        opcao = lerOpcao();
 
         switch (opcao) {
-            case 1: {
-                std::string cpf, nome;
-                int idade;
-
-                std::cout << "Insira o CPF: ";
-                std::getline(std::cin, cpf);
-                std::cout << "Insira o nome: ";
-                std::getline(std::cin, nome);
-                std::cout << "Insira a idade: ";
-                std::cin >> idade;
-                std::cin.ignore();
-
-                Astronauta astronauta(cpf, nome, idade);
-                cadastroAstronauta.adicionarAstronauta(astronauta); // Corrected function call
-                std::cout << "Astronauta cadastrado com sucesso!\n";
+            case 1:
+                cadastrarAstronauta(cadastroAstronauta);
                 break;
-            }
-            case 2: {
-                int codigo;
-                std::cout << "Insira o código do voo: ";
-                std::cin >> codigo;
-                std::cin.ignore();
-
-                gerenciamentoVoo.cadastrarVoo(codigo);
-                std::cout << "Voo cadastrado com sucesso!\n";
+            case 2:
+                cadastrarVoo(gerenciamentoVoo);
                 break;
-            }
-            case 3: {
-                int codigo;
-                std::string cpf;
-
-                std::cout << "Insira o código do voo: ";
-                std::cin >> codigo;
-                std::cin.ignore();
-                std::cout << "Insira o CPF do astronauta: ";
-                std::getline(std::cin, cpf);
-
-                gerenciamentoVoo.adicionarAstronautaAoVoo(codigo, cpf);
+            case 3:
+                adicionarAstronautaAoVoo(gerenciamentoVoo);
                 break;
-            }
-            case 4: {
-                int codigo;
-                std::string cpf;
-
-                std::cout << "Insira o código do voo: ";
-                std::cin >> codigo;
-                std::cin.ignore();
-                std::cout << "Insira o CPF do astronauta: ";
-                std::getline(std::cin, cpf);
-
-                gerenciamentoVoo.removerAstronautaDoVoo(codigo, cpf);
+            case 4:
+                removerAstronautaDoVoo(gerenciamentoVoo);
                 break;
-            }
-            case 5: {
-                gerenciamentoVoo.listarVoos();
+            case 5:
+                listarVoos(gerenciamentoVoo);
                 break;
-            }
-            case 6: {
-                cadastroAstronauta.listarAstronautas();
+            case 6:
+                listarAstronautas(cadastroAstronauta);
                 break;
-            }
-            case 0: {
+            case 7:
+                listarAstronautasMortos(cadastroAstronauta);
+                break;
+            case 8:
+                explodirVoo(gerenciamentoVoo, cadastroAstronauta);
+                break;
+            case 9:
+                lancarVoo(gerenciamentoVoo);
+                break;
+            case 0:
                 std::cout << "Saindo...\n";
                 break;
-            }
-            default: {
+            default:
                 std::cout << "Opção inválida! Tente novamente.\n";
+                pausarTela();
                 break;
-            }
         }
     } while (opcao != 0);
 

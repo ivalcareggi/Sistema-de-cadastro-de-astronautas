@@ -6,8 +6,6 @@
 
 void exibirMenu();
 int lerOpcao();
-std::string lerString(const std::string& mensagem);
-int lerInt(const std::string& mensagem);
 void limparTela();
 void pausarTela();
 void cadastrarAstronauta(CadastroAstronauta& cadastroAstronauta);
@@ -16,5 +14,8 @@ void adicionarAstronautaAoVoo(GerenciamentoVoo& gerenciamentoVoo);
 void removerAstronautaDoVoo(GerenciamentoVoo& gerenciamentoVoo);
 void listarVoos(GerenciamentoVoo& gerenciamentoVoo);
 void listarAstronautas(CadastroAstronauta& cadastroAstronauta);
+void listarAstronautasMortos(const CadastroAstronauta& cadastroAstronauta);
+void explodirVoo(GerenciamentoVoo& gerenciamentoVoo, CadastroAstronauta& cadastroAstronauta);
+void lancarVoo(GerenciamentoVoo& gerenciamentoVoo);
 
-#endif
+#endif // EXIBIR_MENU_H

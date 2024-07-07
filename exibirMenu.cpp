@@ -1,9 +1,7 @@
+#include "exibirMenu.h"
 #include <iostream>
 #include <string>
 #include <limits>
-#include "GerenciamentoVoo.h"
-#include "Cadastro_Astronauta.h"
-#include "exibirMenu.h"
 
 void exibirMenu() {
     std::cout << "===== Menu =====\n";
@@ -13,6 +11,9 @@ void exibirMenu() {
     std::cout << "4. Remover Astronauta do Voo\n";
     std::cout << "5. Listar Voos\n";
     std::cout << "6. Listar Astronautas\n";
+    std::cout << "7. Listar Astronautas Mortos\n";
+    std::cout << "8. Explodir Voo\n";
+    std::cout << "9. Lançar Voo\n";
     std::cout << "0. Sair\n";
     std::cout << "Escolha uma opção: ";
 }
@@ -136,4 +137,32 @@ void listarAstronautas(CadastroAstronauta& cadastroAstronauta) {
     limparTela();
     cadastroAstronauta.listarAstronautas();
     pausarTela();
+}
+
+void listarAstronautasMortos(const CadastroAstronauta& cadastroAstronauta) {
+    limparTela();
+    cadastroAstronauta.listarAstronautasMortos();
+    pausarTela();
+}
+
+void explodirVoo(GerenciamentoVoo& gerenciamentoVoo, CadastroAstronauta& cadastroAstronauta) {
+    limparTela();
+    int codigo = lerInt("Digite o código do voo: ");
+    gerenciamentoVoo.explodirVoo(codigo, cadastroAstronauta);
+    pausarTela();
+}
+
+void lancarVoo(GerenciamentoVoo& gerenciamentoVoo) {
+    limparTela();
+    int codigo = lerInt("Digite o código do voo: ");
+    for (auto& voo : gerenciamentoVoo.getVoos()) {
+        if (voo.getCodigo() == codigo) {
+            voo.lancar();
+            std::cout << "Voo com código " << codigo << " lançado com sucesso.\n";
+            pausarTela();
+            return;
+        }
+    }
+    std::cout << "Voo com código " << codigo << " não encontrado.\n";
+    pausarTela();   
 }

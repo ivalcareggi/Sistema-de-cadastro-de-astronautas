@@ -1,8 +1,9 @@
-#ifndef GERENCIAMENTO_VOO_H
-#define GERENCIAMENTO_VOO_H
+#ifndef GERENCIAMENTOVOO_H
+#define GERENCIAMENTOVOO_H
 
-#include "Voo.h"
+
 #include <vector>
+#include "Voo.h"
 
 class GerenciamentoVoo {
 public:
@@ -10,9 +11,11 @@ public:
     void adicionarAstronautaAoVoo(int codigo, const std::string& cpf);
     void removerAstronautaDoVoo(int codigo, const std::string& cpf);
     void listarVoos() const;
+    void explodirVoo(int codigo, CadastroAstronauta& cadastroAstronauta);
+    std::vector<Voo>& getVoos();
 
 private:
     std::vector<Voo> voos;
 };
 
-#endif // GERENCIAMENTO_VOO_H
+#endif // GERENCIAMENTOVOO_H
